@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthony Gallagher — Software Architect</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1F4E79;
+      --dark:   #111111;
+      --gray:   #555555;
+      --light:  #f4f6f9;
+      --border: #d8dde6;
+      --white:  #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--dark);
+      background: var(--white);
+    }
+
+    a { color: var(--navy); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    nav .inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 52px;
+    }
+    nav .brand {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav ul a {
+      font-size: 0.88rem;
+      color: var(--gray);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--navy); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+    .hero .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.92rem;
+      color: var(--gray);
+    }
+    .hero .contact-line a {
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero .contact-line a:hover { color: var(--navy); text-decoration: none; }
+
+    /* ── Sections ── */
+    section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy);
+      display: inline-block;
+    }
+
+    /* ── About ── */
+    .about p {
+      font-size: 1.05rem;
+      color: var(--dark);
+      max-width: 680px;
+      margin-bottom: 14px;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px 20px;
+    }
+    .skill-card h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.55;
+    }
+
+    /* ── Experience ── */
+    .exp-list { display: flex; flex-direction: column; gap: 36px; }
+    .exp-item {}
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .exp-company {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .exp-dates {
+      font-size: 0.88rem;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+    .exp-title {
+      font-size: 0.93rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .exp-desc {
+      font-size: 0.95rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── Projects ── */
+    .project-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--navy);
+      border-radius: 6px;
+      padding: 22px 24px;
+      max-width: 640px;
+    }
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .project-card .meta {
+      font-size: 0.83rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .project-card p {
+      font-size: 0.93rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    .project-card .proj-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ── Education ── */
+    .edu-list { display: flex; flex-direction: column; gap: 12px; }
+    .edu-item { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+    .edu-degree { font-size: 0.95rem; color: var(--dark); }
+    .edu-degree strong { font-weight: 600; }
+    .edu-school { font-size: 0.88rem; color: var(--gray); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      nav ul { gap: 16px; }
+      nav ul a { font-size: 0.78rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <span class="brand">Anthony Gallagher</span>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Anthony Gallagher</h1>
+      <p class="tagline">Software Architect &amp; Principal Engineer &nbsp;·&nbsp; Pittsburgh, PA</p>
+      <div class="contact-line">
+        <a href="mailto:anthonyghr@gmail.com">anthonyghr@gmail.com</a>
+        <a href="https://linkedin.com/in/anthonyghr" target="_blank" rel="noopener">linkedin.com/in/anthonyghr</a>
+        <a href="https://github.com/4anthonyghr" target="_blank" rel="noopener">github.com/4anthonyghr</a>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="section-title">About</div>
+      <p>
+        I am a software architect and principal engineer with 25+ years of experience building large-scale enterprise systems. For 14 years I served as a software architect at Carnegie Mellon University, where I led the architecture of the S3 Student Information System — a half-million-line Java codebase serving the full academic and financial lifecycle of one of the most complex research universities in the world.
+      </p>
+      <p>
+        My background spans enterprise Java, distributed systems, cloud infrastructure, and data integration. I have built production software in domains ranging from public health informatics and pharmaceutical compliance to defense research and higher education. I am equally comfortable driving technical decisions at the architectural level and writing production code.
+      </p>
+      <p>
+        I am currently available for full-time Principal Engineer, Staff Engineer, or Software Architect roles — remote preferred.
+      </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-title">Skills</div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <p>Java (14+ years), SQL, Python, PHP, Groovy, JavaScript, Clojure, Common Lisp</p>
+        </div>
+        <div class="skill-card">
+          <h3>Frameworks &amp; Testing</h3>
+          <p>Spring Boot, Spring MVC, Spring AOP/AspectJ, Play Framework, MyBatis/iBatis, FreeMarker, Django, Selenium, Cucumber</p>
+        </div>
+        <div class="skill-card">
+          <h3>Integration &amp; APIs</h3>
+          <p>Informatica IICS (iPaaS), REST, XML, JSON, AWS Lambda, S3, SQS, SNS</p>
+        </div>
+        <div class="skill-card">
+          <h3>DevOps &amp; Infrastructure</h3>
+          <p>Git, Jenkins, Gradle, Docker, Podman, Prometheus, Splunk, Linux, CI/CD</p>
+        </div>
+        <div class="skill-card">
+          <h3>Databases</h3>
+          <p>MySQL, PostgreSQL, Oracle, Snowflake, Redis, Memcached</p>
+        </div>
+        <div class="skill-card">
+          <h3>Architecture</h3>
+          <p>Distributed Systems, Microservices, Enterprise Integrations, REST APIs, Agile/Scrum</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-title">Experience</div>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Eucharistia Consulting, LLC</span>
+            <span class="exp-dates">Jan 2026 – Present</span>
+          </div>
+          <div class="exp-title">Independent Software Architect &amp; Consultant · Pittsburgh, PA</div>
+          <div class="exp-desc">Software architecture consulting and technical leadership for clients navigating enterprise modernization and system design challenges.</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Carnegie Mellon University</span>
+            <span class="exp-dates">Feb 2012 – Mar 2026</span>
+          </div>
+          <div class="exp-title">Software Architect · Pittsburgh, PA</div>
+          <div class="exp-desc">
+            Lead architect for the S3 Student Information System (~500,000 LOC): enrollment web applications, REST services, and high-volume batch programs serving the full student lifecycle. Directed modernization from legacy GWT to Spring Boot and Spring MVC; established Jenkins CI/CD pipelines, Docker/Podman containerization, Gradle build standardization, and Prometheus/Splunk observability. Architected Informatica IICS data integration across institutional systems of record. Introduced Selenium and Cucumber automated testing division-wide. Founded and led the Software Development Workgroup; organized university-wide AI Hackathon.
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">University of Pittsburgh — RODS Laboratory</span>
+            <span class="exp-dates">Aug 2011 – Feb 2012</span>
+          </div>
+          <div class="exp-title">Application Systems Architect · Pittsburgh, PA</div>
+          <div class="exp-desc">
+            Built a web-based decision-support system from the ground up using Play Framework for public health officials at the Real-time Outbreak and Disease Surveillance (RODS) Laboratory. Consolidated legacy simulation tools into a unified, production-grade platform used in live disease surveillance.
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Wellspring Worldwide</span>
+            <span class="exp-dates">Apr 2009 – Aug 2011</span>
+          </div>
+          <div class="exp-title">Principal Engineer · Pittsburgh, PA</div>
+          <div class="exp-desc">
+            Extended Django's core framework to build Zeto, a Python-based distributed offline/online sync engine with automatic conflict resolution. Delivered compliance-grade enterprise SaaS for Fortune 500 pharmaceutical clients.
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">Carnegie Mellon University — DARPA Coordinators</span>
+            <span class="exp-dates">2000 – 2009</span>
+          </div>
+          <div class="exp-title">Graduate Research Fellow · Pittsburgh, PA</div>
+          <div class="exp-desc">
+            Core engineer on the DARPA Coordinators program. Designed and built a multi-agent scheduling system for dynamic, real-time team coordination. Primary developer of the Common Lisp constraint-based scheduling engine.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">Projects</div>
+      <div class="project-card">
+        <h3>seirlib</h3>
+        <div class="meta">Clojure &nbsp;·&nbsp; Open Source &nbsp;·&nbsp; Eclipse Public License</div>
+        <p>
+          An open-source Clojure library implementing SEIR compartmental epidemic models (Susceptible, Exposed, Infected, Recovered) for disease spread simulation. Includes a Java interop API for integration with JVM-based applications. Developed at the University of Pittsburgh's RODS Laboratory, Bioinformatics Department.
+        </p>
+        <a class="proj-link" href="https://github.com/4anthonyghr/seirlib" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-title">Education</div>
+      <div class="edu-list">
+        <div class="edu-item">
+          <span class="edu-degree"><strong>Ph.D. in Robotics</strong> — Carnegie Mellon University, 2009</span>
+          <span class="edu-school">Planning &amp; Scheduling Agents, Distributed AI</span>
+        </div>
+        <div class="edu-item">
+          <span class="edu-degree"><strong>M.S. in Robotics</strong> — Carnegie Mellon University, 2005</span>
+          <span class="edu-school">Artificial Intelligence, Constraint Programming</span>
+        </div>
+        <div class="edu-item">
+          <span class="edu-degree"><strong>M.S. in Electrical Engineering</strong> — University of Central Florida, 2000</span>
+          <span class="edu-school">AI, Context-Based Reasoning, Signal Processing</span>
+        </div>
+        <div class="edu-item">
+          <span class="edu-degree"><strong>B.S. in Computer Engineering</strong> — University of Central Florida, 1998</span>
+          <span class="edu-school">Minor: Mathematics</span>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <footer>
+    <p>Anthony Gallagher &nbsp;·&nbsp; Pittsburgh, PA &nbsp;·&nbsp;
+      <a href="mailto:anthonyghr@gmail.com">anthonyghr@gmail.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
